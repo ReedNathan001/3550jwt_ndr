@@ -113,4 +113,13 @@ class TestMyServer(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main()
+    suite = unittest.defaultTestLoader.loadTestsFromTestCase(TestMyServer)
+    runner = unittest.TextTestRunner()
+    result = runner.run(suite)
+
+    total = result.testsRun
+    failed = len(result.failures)
+    errored = len(result.errors)
+    passed = total - failed - errored
+
+    print(f"\nPassed: {passed}/{total} ({(passed/total)*100:.2f}%)")
